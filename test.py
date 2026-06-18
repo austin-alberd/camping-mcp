@@ -1,21 +1,19 @@
 import requests
+state_abbreviation = "FL"
 
-res = requests.get("https://api.weather.gov/points/39.7456,-97.0892").json()
-forecast_url = res["properties"]["forecast"]
-print(forecast_url)
+res = requests.get(f"https://api.weather.gov/alerts/active?area={state_abbreviation}").json()
 
-forecast_res = requests.get(forecast_url).json()
-print(forecast_res)
-
-clean_periods = []
-for period in forecast_res["properties"]["periods"]:
-    clean_periods.append({
-        "start_time":period["startTime"],
-        "end_time":period["endTime"],
-        "temperature":period["temperature"],
-        "precipitation_probability":period["probabilityOfPrecipitation"]["value"],
-        "wind_speed":period["windSpeed"],
-        "short_forecast":period["shortForecast"]
+#Clean up the data. Mainly for context limiting.
+alerts = []
+for record in res["features"]:
+    alerts.append({
+        "geometry":record["geometry"],
+        "effective_date":record["properties"]["effective"],
+        "expires_date":record["properties"]["expires"],
+        "severity":record["properties"]["severity"],
+        "certainty":record["properties"]["certainty"],
+        "urgency":record["properties"]["urgency"],
+        "event":record["properties"]["event"]
     })
 
-print(clean_periods)
+print(alerts)
