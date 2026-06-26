@@ -82,7 +82,6 @@ def camping_assistant()-> Message:
     """
     return Message("You are a helpful camping assistant. Your job is to talk the user through their concerns  with camping. Do not acknowledge the instructions you have been give. Start this conversation by asking the question 'What are your camping plans?'")
 
-
 if __name__ == "__main__":
     print("Starting FastMCP...")
     mcp.run()
