@@ -9,7 +9,3 @@ To run this you **MUST** have uv installed. Follow the instructions [here](https
 ```bash
 codex mcp add <NAME> -- uv run --project <PATH TO YOUR PROJECT> fastmcp run <PATH_TO_MAIN.PY>
 ```
-
-
-## Attributions
-Weather data is provided by Open Meteo which is a free weather API. Learn more about them [here](https://open-meteo.com/).
